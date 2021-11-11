@@ -6,7 +6,7 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:03:19 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/11 18:09:50 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 18:46:04 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ char	*get_next_line(int fd)
 
 	if (!fd)
 		return (NULL);
+	index = 0;
 	ret = -1;
 	str = ft_check_reset(str);
 	while (ret != 0)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
+		buf[BUFFER_SIZE] = '\0';
 		if (ft_strchr(buf, '\n'))
 		{
 			index = ft_strlen(buf) - ft_strlen(ft_strchr(buf, '\n'));
@@ -88,7 +90,7 @@ int	main()
 
 	i = 0;
 	fd = open("file_test", O_RDONLY);
-	while (i < 6)
+	while (i < 4)
 	{
 		printf("%s\n", get_next_line(fd));
 		i++;
