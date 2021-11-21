@@ -6,12 +6,12 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:03:37 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/11 16:00:15 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 11:50:36 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+/*
 void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
@@ -106,3 +106,4 @@ char	*ft_strdup(const char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+*/

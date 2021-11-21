@@ -6,7 +6,7 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:02:47 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/11 18:45:42 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 11:49:11 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *src);
+/*
+char	*ft_substr(char *buf);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(char *src);
 char	*ft_strchr(const char *str, int c);
 size_t	ft_strlen(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
-char	*get_next_line(int fd);
 char	*ft_check_reset(char *str);
+*/
+char	*get_next_line(int fd);
+
 
 #endif
