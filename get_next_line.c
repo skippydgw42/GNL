@@ -6,78 +6,62 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:24:17 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/21 15:35:06 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/22 14:05:09 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] || str[i] == '\n')
-		i++;
-	return (i);
-}
-
-char	*ft_strchr(const char *str, int c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == (char)c)
-			return ((char *)&str[i]);
-		i++;
-	}
-	if ((char)c == '\0')
-		return ((char *)&str[i]);
-	return (NULL);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	size_t	i;
-	size_t	j;
-	size_t	len;
-	char	*output;
-
-	i = 0;
-	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	output = malloc(sizeof(char) * (len + 1));
-	if (!output)
-		return (NULL);
-	while (s1[i])
-	{
-		output[i] = s1[i];
-		i++;
-	}
-	while (s2[j] || s2[j] == '\n')
-		output[i++] = s2[j++];
-	output[i] = '\0';
-	return (output);
-}
-
-char	*ft_strndup(char *str, int n)
+char	*ft_strcdup(char *str, char c)
 {
 	int		i;
+	size_t	n;
 	char	*output;
 
 	i = 0;
+	n = ft_strlen(str);
+	if (n == 0)
+		return (NULL);
 	output = malloc(sizeof(char) * (n + 1));
 	if (!output)
 		return (NULL);
-	while (str[i] && i < n)
+	while (str[i])
 	{
+		if (str[i] == c)
+		{
+			output[i] = str[i];
+			i++;
+			break;
+		}
 		output[i] = str[i];
 		i++;
 	}
 	output[i] = '\0';
 	return (output);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_calloc(1, 1));
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
+	if (start < ft_strlen(s))
+	{
+		str = ft_calloc((len + 1), sizeof(char));
+		if (!str)
+			return (NULL);
+	}
+	while (i < len)
+		str[i++] = s[start++];
+	str[i] = '\0';
+	return (str);
 }
 
 char	*ft_check(char *str)
@@ -93,99 +77,51 @@ char	*ft_check(char *str)
 	i++;
 	return (str);
 }
-/*
-char	*ft_dispatch(char *str, char buf[BUFFER_SIZE + 1])
-{
-	char	*temp;
-	char	*output;
 
-	if (ft_strchr(str, '\n'))
-	{
-		temp = str;
-		output = ft_strndup(temp, ft_strlen(temp) - ft_strlen(ft_strchr(temp, '\n')) + 1);
-		str = ft_strndup(ft_strchr(temp, '\n') + 1, ft_strlen(ft_strchr(temp, '\n')));
-		free(temp);
-		return (output);
-	}
-	else
-	{
-		temp = str;
-		str = ft_strjoin(temp, buf);
-		free(temp);
-	}
-	return (str);
-}
-*/
-/*
-char	*get_next_line(int fd)
+char	*ft_return_line(char **str)
 {
-	int				ret;
-	char			buf[BUFFER_SIZE + 1];
-	static char		*str = NULL;
-	//char			*output;
+	char	*newline;
+	char	*nextline;
+	char	*to_free;
 
-	if (fd <= 0 || fd > 1024 || BUFFER_SIZE < 1)
+	if (ft_strlen(*str) == 0)
+	{
+		free(*str);
 		return (NULL);
-	ret = 1;
-	while (ret > 0)
-	{
-		ret = read(fd, buf, BUFFER_SIZE);
-		buf[ret] = '\0';
-		if (ret < 1 && !str)
-		{
-			free(str);
-			return (NULL);
-		}
-		str = ft_check(str);
-		if (!str)
-			str = ft_strndup(buf, ft_strlen(buf));
-		str = ft_dispatch(str, buf);
-		if (ft_strchr(str, '\n'))// || ret == 0)
-			return (str);
 	}
-	return (str);
+	newline = ft_strcdup(*str, '\n');
+	nextline = ft_strchr(*str, '\n');
+	to_free = *str;
+	*str = ft_substr(*str, nextline - *str + 1, ft_strlen(*str));
+	free(to_free);
+	return (newline);
 }
-*/
+
 char	*get_next_line(int fd)
 {
 	int			ret;
 	char		buf[BUFFER_SIZE + 1];
-	char		*str;
-	char		*temp;
-	static char	*stat_str = NULL;
+	static char	*str;	
+	char		*to_free;
 
-	if (fd < 1 || BUFFER_SIZE < 1)
+	if (fd < 0)
 		return (NULL);
-	ret = 1;
-	str = malloc(sizeof(char) * 1);
-	str[0] = '\0';
+	str = ft_check(str);
+	if (ft_strchr(str, '\n'))
+		return (ft_return_line(&str));
+	ret = read(fd, buf, BUFFER_SIZE);
 	while (ret > 0)
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret < 1)
-			return (NULL);
 		buf[ret] = '\0';
-		if (!ft_strchr(buf,'\n'))
-		{
-			if (stat_str)
-			{
-				str = ft_strjoin(stat_str, buf);
-				free(stat_str);
-			}
-			else
-				str = ft_strjoin(str, buf);
-			printf("str : %s\n", str);
-		}
-		if (ft_strchr(buf, '\n'))
-		{
-			temp = ft_strjoin(str, buf);
-			stat_str = ft_strndup(ft_strchr(buf, '\n') + 1, ft_strlen(buf));
-			str = ft_strndup(temp, ft_strlen(temp) - ft_strlen(stat_str));
-			free (temp);
-			return (str);
-		}
+		to_free = str;
+		str = ft_strjoin(str, buf);
+		if (to_free)
+			free(to_free);
+		if (ft_strchr(str,'\n'))
+			return (ft_return_line(&str));
+		ret = read(fd, buf, BUFFER_SIZE);
 	}
-	return (stat_str);
+	return (ft_return_line(&str));
 }
 
 int	main()
@@ -195,8 +131,8 @@ int	main()
 	fd = open("file_test", O_RDONLY);
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
-//	printf("%s", get_next_line(fd));
-//	printf("%s", get_next_line(fd));
-//	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 }
 

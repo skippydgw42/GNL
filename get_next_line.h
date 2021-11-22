@@ -6,7 +6,7 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:02:47 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/18 11:49:11 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/22 14:02:46 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,20 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-/*
-char	*ft_substr(char *buf);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(char *src);
-char	*ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *str);
-void	*ft_calloc(size_t count, size_t size);
-void	ft_bzero(void *s, size_t n);
-char	*ft_check_reset(char *str);
-*/
-char	*get_next_line(int fd);
+# include <string.h>
 
+//==========GET_UTILS.c===========//
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t size);
+size_t	ft_strlen(const char *str);
+char	*ft_strchr(const char *str, int c);
+char	*ft_strjoin(char *s1, char *s2);
+
+//===========GET_NEXT.c==========//
+char	*ft_strcdup(char *str, char c);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
+char	*ft_check(char *str);
+char	*ft_return_line(char **str);
+char	*get_next_line(int fd);
 
 #endif
