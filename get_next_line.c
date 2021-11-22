@@ -6,7 +6,7 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:24:17 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/22 14:05:09 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/22 14:44:35 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char	*get_next_line(int fd)
 	}
 	return (ft_return_line(&str));
 }
-
+/*
 int	main()
 {
 	int		fd;
@@ -135,4 +135,4 @@ int	main()
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 }
-
+*/
