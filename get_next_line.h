@@ -6,7 +6,7 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:02:47 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/23 11:03:29 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/23 17:19:49 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);
 
 //===========GET_NEXT.c==========//
-char	*ft_strcdup(char *str, char c);
-char	*ft_substr(const char *s, unsigned int start, size_t len);
-char	*ft_check(char *str);
-char	*ft_return_line(char **str);
 char	*get_next_line(int fd);
 
 #endif

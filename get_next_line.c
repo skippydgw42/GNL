@@ -6,13 +6,13 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:24:17 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/23 15:34:38 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/23 17:15:14 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strcdup(char *str, char c)
+static char	*ft_strcdup(char *str, char c)
 {
 	int		i;
 	size_t	n;
@@ -40,7 +40,7 @@ char	*ft_strcdup(char *str, char c)
 	return (output);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*str;
@@ -64,22 +64,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_check(char *str)
-{
-	static int	i;
-
-	if (i > 0)
-		return (str);
-	if (!str)
-	str = malloc(sizeof(char) * 1);
-	if (!str)
-		return (NULL);
-	str[0] = '\0';
-	i++;
-	return (str);
-}
-
-char	*ft_return_line(char **str)
+static char	*ft_return_line(char **str)
 {
 	char	*newline;
 	char	*nextline;
