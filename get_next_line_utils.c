@@ -6,7 +6,7 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 12:03:37 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/22 13:56:40 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/23 15:33:55 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] || str[i] == '\n')
 		i++;
 	return (i);
@@ -77,7 +79,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	output = malloc(sizeof(char) * (len + 1));
 	if (!output)
 		return (NULL);
-	while (s1[i])
+	while (s1 && s1[i])
 	{
 		output[i] = s1[i];
 		i++;

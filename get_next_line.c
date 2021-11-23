@@ -6,7 +6,7 @@
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:24:17 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/22 14:44:35 by mdegraeu         ###   ########lyon.fr   */
+/*   Updated: 2021/11/23 15:34:38 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	*ft_check(char *str)
 
 	if (i > 0)
 		return (str);
+	if (!str)
 	str = malloc(sizeof(char) * 1);
 	if (!str)
 		return (NULL);
@@ -101,15 +102,14 @@ char	*get_next_line(int fd)
 {
 	int			ret;
 	char		buf[BUFFER_SIZE + 1];
-	static char	*str;	
+	static char	*str;
 	char		*to_free;
 
 	if (fd < 0)
 		return (NULL);
-	str = ft_check(str);
-	if (ft_strchr(str, '\n'))
-		return (ft_return_line(&str));
 	ret = read(fd, buf, BUFFER_SIZE);
+	if (ret < 0 || (ret == 0 && !str))
+		return (NULL);
 	while (ret > 0)
 	{
 		buf[ret] = '\0';
@@ -129,10 +129,12 @@ int	main()
 	int		fd;
 
 	fd = open("file_test", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	printf("out : %s", get_next_line(fd));
+	printf("out : %s", get_next_line(fd));
+	printf("out : %s", get_next_line(fd));
+	printf("out : %s", get_next_line(fd));
+	printf("out : %s", get_next_line(fd));
+	printf("out : %s", get_next_line(fd));
+	printf("out : %s", get_next_line(fd));
 }
 */
