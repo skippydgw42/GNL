@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 12:02:47 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/24 13:45:50 by mdegraeu         ###   ########lyon.fr   */
+/*   Created: 2021/11/24 12:33:13 by mdegraeu          #+#    #+#             */
+/*   Updated: 2021/11/24 13:46:09 by mdegraeu         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -33,6 +33,6 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);
 
 //===========GET_NEXT.c==========//
-char	*get_next_line(int fd);
+char	*get_next_line_bonus(int fd);
 
 #endif
